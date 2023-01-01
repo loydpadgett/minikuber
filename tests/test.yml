@@ -1,0 +1,5 @@
+---
+- hosts: lprom.l-org.lan
+  roles:
+    - roles/minikuber
+

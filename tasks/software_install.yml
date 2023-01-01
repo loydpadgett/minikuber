@@ -1,0 +1,16 @@
+---
+- name: install minikube using get_url
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}" 
+  loop: "{{ downloads }}"
+
+- name: copy downloads to the /usr/local/bin folder and set execute
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.copy_dest }}"
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: True
+  loop: "{{ downloads }}"

@@ -1,0 +1,16 @@
+---
+- name: 🗺️lets template the kvm driver config
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    setype: "{{ item.setarget }}"
+  loop: "{{ libvirtd }}"
+  notify: libvirt config installed
+  tags:
+    - template
+
+- name: ⏲️ force all handlers to run right now. 
+  ansible.builtin.meta: flush_handlers

@@ -1,0 +1,52 @@
+---
+- name: block statement to catch non-Red Hat OS instances. 
+  block:
+    - name: 👓make sure this is a RedHat OS before continuing. 
+      ansible.builtin.assert:
+        that: ansible_facts['distribution'] == 'RedHat'
+        fail_msg: "This is a {{ ansible_facts['distribution'] }} distro, failing gracefully." 
+        success_msg: "This is a {{ ansible_facts['distribution'] }} based OS, you may proceed. "
+
+    - name: 🎢1st update the yum repo
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+
+    - name: 😀lets build a test to make sure virtualization is enabled.
+      ansible.builtin.assert:
+        that: "'Virtualization:      VT-x' in vt_support"
+        fail_msg: "Please check that VT-X support is presented to the CPU."
+        success_msg: "VT-X support is enabled, proceeding with installation dependency requirements. "
+      delegate_to: lprom.l-org.lan
+      become_user: lpadgett
+
+    - name: 🥪install container tools and virtualization tools.
+      ansible.builtin.yum:
+        name: 
+          - '@Virtualization Host' 
+        state: latest
+
+    - name: 🌱lets build a test to make sure that the kvm module got loaded
+      ansible.builtin.assert:
+        that: "'kvm_intel' in kvm_mod"
+        fail_msg: "The kvm module did not seem to load correctly ❔, please check that the kvm packages are installed --> contents: {{ kvm_mod }}. "
+        success_msg: "The kvm module was verified to be loaded by delegating the task to the affected host. Check output here --> {{ kvm_mod }}. "
+      delegate_to: lprom.l-org.lan
+      become_user: lpadgett
+
+    - name: 🧰install virtualization  tools
+      ansible.builtin.yum:
+        name: "{{ item }}" 
+        state: latest
+      loop: "{{ installs }}"
+      notify: start and enable libvirt service
+
+    - name: 🤠install virt-manager
+      ansible.builtin.yum:
+        name: virt-manager
+        state: latest
+      notify: make sure libvirt started
+  rescue:
+    - name: 🖨️lets print out a message to the user to describe what to try next. 
+      ansible.builtin.debug: 
+        msg: "Whoops, something went wrong. Rerun with verbose mode enabled (-vvv). This only compatible with Red Hat based Operating Systems! "

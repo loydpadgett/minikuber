@@ -1,0 +1,13 @@
+---
+# tasks file for roles/minikuber
+- name: 📫 import installation requirements playbook
+  ansible.builtin.import_tasks: install_requirements.yml
+
+- name: 📫 import user setup playbook
+  ansible.builtin.import_tasks: user_configs.yml
+    
+- name: 📫 import minikube install tasks
+  ansible.builtin.import_tasks: software_install.yml
+
+- name: 📫 import final commands to do the work
+  ansible.builtin.import_tasks: start_cluster.yml

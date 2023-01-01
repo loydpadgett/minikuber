@@ -1,6 +1,36 @@
-# Minikuber v0.2.2
-___
-*An Ansible role to quickly and easily setup kvm2 drivers and a 1 node minikube cluster for development*
-*This role was purpose built for automating Kubernetes Helm charts with the ansible.kubernetes.core.helm module.*
-  - 🪰 create multiple minikube single node clusters on the fly. 
-  - 📦 Future release will include automated Helm charts for specific purposes. 
+Minikuber
+=========
+
+A role to install a minikube cluster on a rhel vm. 
+
+Requirements
+------------
+
+The requirements are satisfied by the role in the early stages. 
+- The kubernetes and openshift modules need to be installed with the --user option. 
+- libvirt needs to be installed and enabled
+- the user needs to be in the libvirt group. 
+
+Role Variables
+--------------
+
+The role variables will mostly be pre-set, the only variables that would affect the cluster would be net driver and memory and cpu size. 
+
+Example Playbook
+----------------
+
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
+    - hosts: servers
+      roles:
+         - { role: minikuber, x: 42 }
+
+License
+-------
+
+MIT
+
+Author Information
+------------------
+
+Loyd Padgett - loydpadgett@gmail.com - github.com/loydpadgett

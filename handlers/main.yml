@@ -1,0 +1,18 @@
+---
+# handlers file for roles/minikuber
+- name: start and enable libvirt service
+  ansible.builtin.service:
+    name: libvirtd
+    state: started
+    enabled: True
+
+- name: start and enable libvirt service
+  ansible.builtin.service:
+    name: libvirtd
+    state: started
+  listen: make sure libvirt started
+
+- name: libvirt config installed
+  ansible.builtin.service:
+    name: libvirtd
+    state: restarted

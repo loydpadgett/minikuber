@@ -1,0 +1,28 @@
+galaxy_info:
+  author: Loyd Padgett
+  description: Set up minikube quickly & easily. 
+  company: Jamf Software
+  license: Apache-2.0
+  min_ansible_version: 2.13.3
+  platforms:
+    - name: Fedora
+  #   versions:
+  #   - all
+  #   - 25
+  # - name: SomePlatform
+  #   versions:
+  #   - all
+  #   - 1.0
+  #   - 7
+  #   - 99.99
+
+  galaxy_tags: 
+    - minikube
+    - development
+    - prometheus
+    - libvirt
+    - virtualization
+
+dependencies: []
+  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
+  # if you add dependencies to this list.

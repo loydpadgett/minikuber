@@ -1,0 +1,24 @@
+---
+- name: create some error control
+  block:
+    - name: ⚾lets start our first cluster
+      command:
+        cmd: "{{ commands }}"
+      register: cmd_output
+      become: False
+      become_user: lpadgett
+      delegate_to: lprom.l-org.lan
+
+  rescue:
+    - name: 🖨️print output of failed command.
+      debug:
+        msg: "{{ cmd_output.std_output }}"
+      when: cmd_output.rc > 0
+
+  always: 
+    - name: 🖨️print successful command output
+      debug:
+        msg: "{{ cmd_output }}"
+      when: cmd_output.rc == 0
+  tags:
+    - cluster

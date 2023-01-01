@@ -1,0 +1,37 @@
+---
+# defaults file for roles/minikuber
+user: lpadgett
+vt_support: "{{ lookup('pipe', 'lscpu | grep -i virtual') }}"
+kvm_mod: "{{ lookup('pipe', 'lsmod | grep kvm') }}"
+folders: 
+  - minikube
+  - kubectl
+installs:
+  - libvirt
+  - libvirt-devel
+  - virt-top
+  - libguestfs-tools
+
+python:
+  - kubernetes
+  - openshift
+
+downloads:
+  - url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    src: "/home/{{ user }}/minikube/minikube-linux-amd64"
+    dest: "/home/{{ user }}/minikube"
+    copy_dest: /usr/local/bin/minikube
+    
+  - url: https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl
+    src: "/home/{{ user }}/kubectl/kubectl"
+    dest: "/home/{{ user }}/kubectl"
+    copy_dest: /usr/local/bin/kubectl
+
+libvirtd:
+  - src: ./templates/libvirtd.conf.j2
+    dest: /etc/libvirt/libvirtd.conf
+    owner: root
+    group: root
+    mode: '0644'
+    setarget: virt_etc_t
+commands: minikube start --cpus=2
