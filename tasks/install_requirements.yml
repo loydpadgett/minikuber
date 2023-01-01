@@ -31,8 +31,8 @@
         that: "'kvm_intel' in kvm_mod"
         fail_msg: "The kvm module did not seem to load correctly ❔, please check that the kvm packages are installed --> contents: {{ kvm_mod }}. "
         success_msg: "The kvm module was verified to be loaded by delegating the task to the affected host. Check output here --> {{ kvm_mod }}. "
-      delegate_to: lprom.l-org.lan
-      become_user: lpadgett
+      delegate_to: "{{ target }}"
+      become_user: "{{ user }}"
 
     - name: 🧰install virtualization  tools
       ansible.builtin.yum:

@@ -19,11 +19,11 @@ The role variables will mostly be pre-set, the only variables that would affect 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role is using the {{ target }} variable and would need to have the target host specified on the command line. The other variable that will most likely need to be changed is the {{ user }} variable. This variable is located in the defaults/main.yml file. Once changed, the role will correctly populate the needed plays with the user variable.  
 
-    - hosts: servers
+    - hosts: "{{ target }}"
       roles:
-         - { role: minikuber, x: 42 }
+         - minikuber
 
 License
 -------

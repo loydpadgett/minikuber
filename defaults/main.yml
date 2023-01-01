@@ -1,6 +1,6 @@
 ---
 # defaults file for roles/minikuber
-user: your_user
+user: root
 vt_support: "{{ lookup('pipe', 'lscpu | grep -i virtual') }}"
 kvm_mod: "{{ lookup('pipe', 'lsmod | grep kvm') }}"
 folders: 
