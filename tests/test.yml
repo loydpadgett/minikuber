@@ -1,5 +1,5 @@
 ---
-- hosts: lprom.l-org.lan
+- hosts: "{{ target }}"
   roles:
     - roles/minikuber
 

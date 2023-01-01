@@ -17,8 +17,8 @@
         that: "'Virtualization:      VT-x' in vt_support"
         fail_msg: "Please check that VT-X support is presented to the CPU."
         success_msg: "VT-X support is enabled, proceeding with installation dependency requirements. "
-      delegate_to: lprom.l-org.lan
-      become_user: lpadgett
+      delegate_to: "{{ target }}"
+      become_user: "{{ user }}"
 
     - name: 🥪install container tools and virtualization tools.
       ansible.builtin.yum:

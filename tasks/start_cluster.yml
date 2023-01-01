@@ -6,8 +6,8 @@
         cmd: "{{ commands }}"
       register: cmd_output
       become: False
-      become_user: lpadgett
-      delegate_to: lprom.l-org.lan
+      become_user: "{{ user }}"
+      delegate_to: "{{ target }}"
 
   rescue:
     - name: 🖨️print output of failed command.
