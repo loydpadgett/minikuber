@@ -10,11 +10,6 @@ galaxy_info:
       - 34
       - 35
       - 36
-    - name: EL
-      versions:
-      - 8.7 
-      - 8.6
-      - 7.10
 
   galaxy_tags: 
     - minikube
