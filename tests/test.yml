@@ -2,4 +2,3 @@
 - hosts: "{{ target }}"
   roles:
     - roles/minikuber
-
