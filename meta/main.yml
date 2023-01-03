@@ -23,6 +23,3 @@ galaxy_info:
     - prometheus
     - libvirt
     - virtualization
-
-dependencies:
-    - VT-x driver enabled
