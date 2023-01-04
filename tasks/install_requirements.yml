@@ -49,4 +49,6 @@
   rescue:
     - name: 🖨️lets print out a message to the user to describe what to try next. 
       ansible.builtin.debug: 
-        msg: "Whoops, something went wrong. Rerun with verbose mode enabled (-vvv). This only compatible with Red Hat based Operating Systems! "
+        msg: "Whoops, something went wrong. Rerun with verbose mode enabled (-vvv). Is this an Ubuntu 💻? We will try installing with apt and then this will fail out and print the error message to user output. "
+      changed_when: ansible_facts['distribution'] == 'Ubuntu'
+
