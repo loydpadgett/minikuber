@@ -2,9 +2,15 @@ galaxy_info:
   author: Loyd Padgett
   description: Set up minikube quickly & easily. 
   company: Jamf Software
-  license: "Apache-2.0"
+  license: "MIT"
   min_ansible_version: 2.9
   platforms:
+    - name: EL
+      versions:
+      - 7
+      - 8
+      - 9
+      
     - name: Fedora
       versions:
       - 34
@@ -17,5 +23,3 @@ galaxy_info:
     - prometheus
     - libvirt
     - virtualization
-
-dependencies: []
