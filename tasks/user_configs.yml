@@ -1,10 +1,15 @@
 ---
+- name: ⛱️ Make certain the libvirt group exists
+  ansible.builtin.group:
+    name: libvirt
+    state: present
+
 - name: 🪤 place user in correct group to manage libvirtd
   ansible.builtin.user:
     name: "{{ user }}"
     groups: libvirt
     append: yes
-
+  
 - name: 🚩create templated config for libvirtd
   ansible.builtin.import_tasks: template_configs.yml
 
