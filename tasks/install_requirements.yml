@@ -1,4 +1,5 @@
 ---
+# order of yum installation is important, I may converge but this was the best way that worked. 
 - name: block statement to catch non-Red Hat OS instances. 
   block:
     - name: 👓make sure this is a RedHat OS before continuing. 
@@ -49,6 +50,6 @@
   rescue:
     - name: 🖨️lets print out a message to the user to describe what to try next. 
       ansible.builtin.debug: 
-        msg: "Whoops, something went wrong. Rerun with verbose mode enabled (-vvv). Is this an Ubuntu 💻? We will try installing with apt and then this will fail out and print the error message to user output. "
-      changed_when: ansible_facts['distribution'] == 'Ubuntu'
-
+        msg: "{{ item.msg }}"      
+      loop: "{{ libvirtd }}"
+      when: ansible_facts['distribution'] == 'Ubuntu'

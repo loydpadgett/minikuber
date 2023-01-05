@@ -34,4 +34,8 @@ libvirtd:
     group: root
     mode: '0644'
     setarget: virt_etc_t
-commands: minikube start --cpus=2
+    msg: "Whoops, something went wrong. Rerun with verbose mode enabled (-vvv). Is this an Ubuntu 💻? We will try installing with apt and then this will fail out and print the error message to user output. "
+
+commands: minikube start --cpus=4 --install-addons=true --kubernetes-version=latest --memory=6g
+
+minikube_status: minikube status
